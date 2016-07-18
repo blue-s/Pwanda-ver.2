@@ -2,9 +2,12 @@
 #include <stdlib.h>
 #include <time.h>
 
+//TCHAR path[]=_T("C:\\Users\\kosta\\Documents\\");
 TCHAR path[]=_T("C:\\");
 TCHAR extension[]=_T(".txt");
-TCHAR dummyName[100]=_T("\0"); // path + resultName + extension
+TCHAR back[]=_T("\\");
+TCHAR dummyFileName[100]=_T("\0"); // path + resultName + extension
+TCHAR dummyFolderName[100]=_T("\0"); // path + resultName
 TCHAR dummyWhite[100]=_T("\0");
 
 DWORD specialCh[]={33, 35, 36, 37, 64};
@@ -55,30 +58,48 @@ int makeDummy()
 {	
 	makeDummyName();
 	DWORD lpdwFlags[100];
+	DWORD res;
 	BOOL test;
 
 	TCHAR fileData[] = _T("This is Dummy File");
 
-	// 
-	_tcscpy(dummyName, path);
-	_tcscat(dummyName, resultName);
-	_tcscat(dummyName, extension);
+	// 더미 폴더 이름 설정
+	_tcscpy(dummyFolderName, path);			// dummyFolderName = C:\Users\kosta\Documents(\)
+	_tcscat(dummyFolderName, resultName);	// dummyFolderName = C:\Users\kosta\Documents\[랜덤이름]
 
-	// 
+	// 더미 폴더 생성
+	res = CreateDirectory(dummyFolderName, NULL);
+
+	// 더미 폴더 생성 에러 처리
+	if (res == 0)
+	{
+		DWORD err = GetLastError();
+		printf("err %d\n", err);
+	}
+	else
+		printf("Create Folder SUCCESS!!!!!!! \n");
+
+	// 더미 파일 이름 설정
+	_tcscpy(dummyFileName, dummyFolderName);	// dummyFileName = C:\Users\kosta\Documents\[랜덤이름]
+	_tcscat(dummyFileName, back);				// dummyFileName = C:\Users\kosta\Documents\[랜덤이름](\)
+	_tcscat(dummyFileName, resultName);			// dummyFileName = C:\Users\kosta\Documents\[랜덤이름]\[랜덤이름]
+	_tcscat(dummyFileName, extension);			// dummyFileName = C:\Users\kosta\Documents\[랜덤이름]\[랜덤이름].txt
+
+	// 생성한 더미 폴더와 더미 파일을 화이트 리스트에 변수로 넘겨야 됨 
 	_tcscpy(dummyWhite, resultName);
 	_tcscat(dummyWhite, extension);
 	
+
 	printf("최종 더미 파일이름과 경로: ");
-	for(int i=0; i<sizeof(dummyName)/sizeof(TCHAR); i++){
-		printf("%c", dummyName[i]);
+	for(int i=0; i<sizeof(dummyFileName)/sizeof(TCHAR); i++){
+		printf("%c", dummyFileName[i]);
 	}
 	
 	printf("\n");
 
-
 	// 얘를 for 문으로 묶어서 3번 반복할 것임 
-
-	HANDLE hFile = CreateFile( dummyName, 
+	// 더미 파일 생성
+	HANDLE hFile = CreateFile( dummyFileName, 
 		GENERIC_READ | GENERIC_WRITE,
 		FILE_SHARE_WRITE,					// share for writing
 		NULL,								// default security
@@ -104,5 +125,8 @@ int makeDummy()
 		);
 
 	CloseHandle(hFile);
+
+
 	return 0;
 }
+

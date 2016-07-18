@@ -66,7 +66,6 @@ void ProcessChange(int idx)
 
 				//ExtractProcess(flag, buffer_file_name);					
 				Output_Console(FOREGROUND_GREEN, _T("[ADDED] %s%s \n"), g_szDrives[idx], szFile);
-				_tprintf(_T("-------------------------------[SUCCESS]--------------------------------- \n\n"));
 				break;
 			case FILE_ACTION_MODIFIED:
 				if(flag==4){
