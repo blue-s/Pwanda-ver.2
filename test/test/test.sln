@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test", "test\test.vcxproj", "{AB705D84-19BC-4DC6-A91F-2068CBF05F0D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dllEjection", "dllEjection\dllEjection.vcxproj", "{1CCDA0D2-9D2A-4C22-87FD-E91B6478FFCC}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "testPython", "testPython\testPython.vcxproj", "{318FF5A7-FA4A-4D7A-A210-34B02B014F82}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AB705D84-19BC-4DC6-A91F-2068CBF05F0D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{AB705D84-19BC-4DC6-A91F-2068CBF05F0D}.Debug|Win32.Build.0 = Debug|Win32
+		{AB705D84-19BC-4DC6-A91F-2068CBF05F0D}.Release|Win32.ActiveCfg = Release|Win32
+		{AB705D84-19BC-4DC6-A91F-2068CBF05F0D}.Release|Win32.Build.0 = Release|Win32
+		{1CCDA0D2-9D2A-4C22-87FD-E91B6478FFCC}.Debug|Win32.ActiveCfg = Debug|Win32
+		{1CCDA0D2-9D2A-4C22-87FD-E91B6478FFCC}.Debug|Win32.Build.0 = Debug|Win32
+		{1CCDA0D2-9D2A-4C22-87FD-E91B6478FFCC}.Release|Win32.ActiveCfg = Release|Win32
+		{1CCDA0D2-9D2A-4C22-87FD-E91B6478FFCC}.Release|Win32.Build.0 = Release|Win32
+		{318FF5A7-FA4A-4D7A-A210-34B02B014F82}.Debug|Win32.ActiveCfg = Debug|Win32
+		{318FF5A7-FA4A-4D7A-A210-34B02B014F82}.Debug|Win32.Build.0 = Debug|Win32
+		{318FF5A7-FA4A-4D7A-A210-34B02B014F82}.Release|Win32.ActiveCfg = Release|Win32
+		{318FF5A7-FA4A-4D7A-A210-34B02B014F82}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

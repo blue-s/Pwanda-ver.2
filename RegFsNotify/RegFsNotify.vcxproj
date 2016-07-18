@@ -61,11 +61,14 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <AdditionalIncludeDirectories>C:\Python27\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalLibraryDirectories>C:\Python27\libs;C:\Python27\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>python27.lib;pyexpat.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -89,9 +92,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="checkState.cpp" />
     <ClCompile Include="file.cpp" />
+    <ClCompile Include="processControl.cpp" />
     <ClCompile Include="reg.cpp" />
     <ClCompile Include="RegFsNotify.cpp" />
+    <ClCompile Include="scanVirusTotal.cpp" />
+    <ClCompile Include="SetPrivilege.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="mon.h" />
