@@ -2,13 +2,17 @@
 #include <stdlib.h>
 #include <time.h>
 
+//TCHAR path[]=_T"Users\\kosta\\Documents\\+[랜덤명]" 
 //TCHAR path[]=_T("C:\\Users\\kosta\\Documents\\");
 TCHAR path[]=_T("C:\\");
+
 TCHAR extension[]=_T(".txt");
 TCHAR back[]=_T("\\");
-TCHAR dummyFileName[100]=_T("\0"); // path + resultName + extension
+
+TCHAR dummyFileName[100]=_T("\0"); // path + resultName + extension 
 TCHAR dummyFolderName[100]=_T("\0"); // path + resultName
-TCHAR dummyWhite[100]=_T("\0");
+TCHAR * dummy_name;
+//TCHAR* dummyWhite[6];
 
 DWORD specialCh[]={33, 35, 36, 37, 64};
 DWORD allCh[] = { 33,35,36,37,64,48,49,50,51,52,
@@ -21,21 +25,21 @@ DWORD allCh[] = { 33,35,36,37,64,48,49,50,51,52,
 
 DWORD firstIndex=0;					// rand 함수 --> 첫번째 글자 index
 DWORD remainIndex=0;				// rand 함수 --> 나머지 7글자 index
-TCHAR resultName[]=_T("\0");		// 결과: 더미파일 이름
+TCHAR resultName[8]=_T("\0");		// 결과: 더미파일 이름
 
 int makeDummyName(){
 
+	dummyWhite[dummyNum] = new TCHAR [100];
+	//memset(dummyWhite, 0, sizeof(dummyWhite));
 	srand(time(NULL));
 	// C:\ , $Recycle.Bin, Document
-	//for(int i=0; i<3; i++){
-
-		// 첫 번째 값 
+	
+	for(int j=0; j<3; j++){
+		//memset(resultName, 0, sizeof(resultName));
 		firstIndex=rand()%5;
 		resultName[0] = specialCh[firstIndex];
 		printf("resultName[0]: %c\n", resultName[0]);
 
-
-		// 나머지 7개 값
 		for(int i=1; i<8; i++){
 			remainIndex=rand()%67;
 			printf("index: %d\n", remainIndex);
@@ -48,8 +52,16 @@ int makeDummyName(){
 			printf("%c",resultName[i]);
 		}
 
+		_tcscpy(dummyWhite[j], resultName);
+		_tcscat(dummyWhite[j], back);
+		printf("<---------- %S ----------> \n", dummyWhite[j]);
+
+		dummyNum++;
+
 		printf("\n");
-	//}
+	}
+	
+	//Documents for문
 
 	return 0;
 }
@@ -84,11 +96,6 @@ int makeDummy()
 	_tcscat(dummyFileName, back);				// dummyFileName = C:\Users\kosta\Documents\[랜덤이름](\)
 	_tcscat(dummyFileName, resultName);			// dummyFileName = C:\Users\kosta\Documents\[랜덤이름]\[랜덤이름]
 	_tcscat(dummyFileName, extension);			// dummyFileName = C:\Users\kosta\Documents\[랜덤이름]\[랜덤이름].txt
-
-	// 생성한 더미 폴더와 더미 파일을 화이트 리스트에 변수로 넘겨야 됨 
-	_tcscpy(dummyWhite, resultName);
-	_tcscat(dummyWhite, extension);
-	
 
 	printf("최종 더미 파일이름과 경로: ");
 	for(int i=0; i<sizeof(dummyFileName)/sizeof(TCHAR); i++){

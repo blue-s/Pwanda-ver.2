@@ -74,7 +74,8 @@ BOOL KillProcess(TCHAR* TargetProcess);				// 프로세스 죽이기
 
 // createDummy.cpp
 int makeDummy();
-
+static TCHAR* dummyWhite[100];
+static int dummyNum = 0;
 
 // ******************* 화이트리스트 *************************
 
@@ -88,12 +89,13 @@ static LPTSTR Prefetch_szAllow[] = {
 	_T("Windows\Prefetch\\"),
 	_T("Prefetch\\"),
 };
-static LPTSTR Dummy_szAllow[] = {  
-	_T(""),
-	_T("Users\\kosta\\Documents"),
-	// 변수 -> 폴더 1		%EHlF4RD	(C:\\%EHlF4RD)
-	// 변수 -> 폴더 2
-	// 변수 -> 폴더 3
+static LPTSTR Dummy_szAllow[10] = {  
+	//_T("%S", dummyWhite[0]),
+	//_T("%S", dummyWhite[1]),
+	//_T("%S", dummyWhite[2]),
+	dummyWhite[0],
+	dummyWhite[1],
+	dummyWhite[2],
 
 };
 
