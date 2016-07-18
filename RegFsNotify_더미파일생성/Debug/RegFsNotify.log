@@ -1,0 +1,40 @@
+﻿빌드 시작: 2016-07-14 오후 6:05:24
+     1>2 노드의 "C:\Users\kosta\Documents\Pwanda\RegFsNotify_이름비교_미완_연주핼\RegFsNotify.vcxproj" 프로젝트(build 대상)입니다.
+     1>InitializeBuildStatus:
+         "AlwaysCreate"이(가) 지정되었기 때문에 "Debug\RegFsNotify.unsuccessfulbuild"을(를) 만들고 있습니다.
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt checkState.cpp extractProcessName.cpp file.cpp processControl.cpp reg.cpp RegFsNotify.cpp setUser.cpp
+         setUser.cpp
+     1>c:\users\kosta\documents\pwanda\regfsnotify_이름비교_미완_연주핼\mon.h(82): warning C4129: 'R' : 문자 이스케이프 시퀀스를 인식할 수 없습니다.
+     1>c:\users\kosta\documents\pwanda\regfsnotify_이름비교_미완_연주핼\mon.h(86): warning C4129: 'P' : 문자 이스케이프 시퀀스를 인식할 수 없습니다.
+         RegFsNotify.cpp
+     1>c:\users\kosta\documents\pwanda\regfsnotify_이름비교_미완_연주핼\mon.h(82): warning C4129: 'R' : 문자 이스케이프 시퀀스를 인식할 수 없습니다.
+     1>c:\users\kosta\documents\pwanda\regfsnotify_이름비교_미완_연주핼\mon.h(86): warning C4129: 'P' : 문자 이스케이프 시퀀스를 인식할 수 없습니다.
+     1>c:\users\kosta\documents\pwanda\regfsnotify_이름비교_미완_연주핼\regfsnotify.cpp(19): warning C4101: 'cb' :참조되지 않은 지역 변수입니다.
+         reg.cpp
+     1>c:\users\kosta\documents\pwanda\regfsnotify_이름비교_미완_연주핼\mon.h(82): warning C4129: 'R' : 문자 이스케이프 시퀀스를 인식할 수 없습니다.
+     1>c:\users\kosta\documents\pwanda\regfsnotify_이름비교_미완_연주핼\mon.h(86): warning C4129: 'P' : 문자 이스케이프 시퀀스를 인식할 수 없습니다.
+     1>c:\users\kosta\documents\pwanda\regfsnotify_이름비교_미완_연주핼\reg.cpp(46): warning C4101: 'cbName' :참조되지 않은 지역 변수입니다.
+     1>c:\users\kosta\documents\pwanda\regfsnotify_이름비교_미완_연주핼\reg.cpp(226): warning C4129: 'M' : 문자 이스케이프 시퀀스를 인식할 수 없습니다.
+         processControl.cpp
+     1>c:\users\kosta\documents\pwanda\regfsnotify_이름비교_미완_연주핼\mon.h(82): warning C4129: 'R' : 문자 이스케이프 시퀀스를 인식할 수 없습니다.
+     1>c:\users\kosta\documents\pwanda\regfsnotify_이름비교_미완_연주핼\mon.h(86): warning C4129: 'P' : 문자 이스케이프 시퀀스를 인식할 수 없습니다.
+         file.cpp
+     1>c:\users\kosta\documents\pwanda\regfsnotify_이름비교_미완_연주핼\mon.h(82): warning C4129: 'R' : 문자 이스케이프 시퀀스를 인식할 수 없습니다.
+     1>c:\users\kosta\documents\pwanda\regfsnotify_이름비교_미완_연주핼\mon.h(86): warning C4129: 'P' : 문자 이스케이프 시퀀스를 인식할 수 없습니다.
+     1>c:\users\kosta\documents\pwanda\regfsnotify_이름비교_미완_연주핼\file.cpp(138): warning C4018: '<' : signed 또는 unsigned가 일치하지 않습니다.
+     1>c:\users\kosta\documents\pwanda\regfsnotify_이름비교_미완_연주핼\file.cpp(157): warning C4018: '<' : signed 또는 unsigned가 일치하지 않습니다.
+         extractProcessName.cpp
+     1>c:\users\kosta\documents\pwanda\regfsnotify_이름비교_미완_연주핼\mon.h(82): warning C4129: 'R' : 문자 이스케이프 시퀀스를 인식할 수 없습니다.
+     1>c:\users\kosta\documents\pwanda\regfsnotify_이름비교_미완_연주핼\mon.h(86): warning C4129: 'P' : 문자 이스케이프 시퀀스를 인식할 수 없습니다.
+     1>c:\users\kosta\documents\pwanda\regfsnotify_이름비교_미완_연주핼\extractprocessname.cpp(15): error C2065: 's' : 선언되지 않은 식별자입니다.
+     1>c:\users\kosta\documents\pwanda\regfsnotify_이름비교_미완_연주핼\extractprocessname.cpp(15): error C2146: 구문 오류 : ';'이(가) 'printf' 식별자 앞에 없습니다.
+         checkState.cpp
+     1>c:\users\kosta\documents\pwanda\regfsnotify_이름비교_미완_연주핼\mon.h(82): warning C4129: 'R' : 문자 이스케이프 시퀀스를 인식할 수 없습니다.
+     1>c:\users\kosta\documents\pwanda\regfsnotify_이름비교_미완_연주핼\mon.h(86): warning C4129: 'P' : 문자 이스케이프 시퀀스를 인식할 수 없습니다.
+         코드를 생성하고 있습니다...
+     1>"C:\Users\kosta\Documents\Pwanda\RegFsNotify_이름비교_미완_연주핼\RegFsNotify.vcxproj" 프로젝트를 빌드했습니다(build 대상). - 실패
+
+빌드하지 못했습니다.
+
+경과 시간: 00:00:05.21
