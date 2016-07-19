@@ -78,6 +78,10 @@ void getUserName();
 extern TCHAR * dummyWhite[6];
 extern int dummyNum;
 
+
+// autoRun.cpp
+void SetRegistyStartProgram();
+
 // ******************* 화이트리스트 *************************
 
 // 화이트 리스트 목록

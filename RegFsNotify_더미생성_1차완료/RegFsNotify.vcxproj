@@ -89,6 +89,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="autoRun.cpp" />
     <ClCompile Include="checkState.cpp" />
     <ClCompile Include="createDummy.cpp" />
     <ClCompile Include="extractProcessName.cpp" />
