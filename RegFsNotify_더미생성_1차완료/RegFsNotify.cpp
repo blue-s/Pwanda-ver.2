@@ -108,7 +108,9 @@ void _tmain(int argc, TCHAR *argv[])
 	if( !SetPrivilege(SE_DEBUG_NAME, TRUE) )
         return;
 
+	getUserName();
 	makeDummy();
+	
 
 	_tprintf(_T("\n"));
 

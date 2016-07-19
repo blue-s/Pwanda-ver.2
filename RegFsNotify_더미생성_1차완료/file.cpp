@@ -94,6 +94,7 @@ void ProcessChange(int idx)
 					continue;
 				break;
 
+				// 사용자가 삭제 시 감지 -> 경고 메세지 출력
 			case FILE_ACTION_REMOVED: 
 				if(flag==4){
 					Output_Console(FOREGROUND_RED, _T("\n [REMOVED] %s%s \n"), g_szDrives[idx], szFile);

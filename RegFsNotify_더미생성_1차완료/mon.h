@@ -72,9 +72,9 @@ void ListProcessInfo(void);							// 프로세스 목록 출력
 BOOL KillProcess(TCHAR* TargetProcess);				// 프로세스 죽이기
 
 
-
 // createDummy.cpp
 int makeDummy();
+void getUserName();
 extern TCHAR * dummyWhite[6];
 extern int dummyNum;
 

@@ -2,12 +2,16 @@
 #include <stdlib.h>
 #include <time.h>
 
-TCHAR path_C[]=_T("c:\\");
-TCHAR path_Recycle[]=_T("C:\\$Recycle.Bin\\");
-TCHAR white_Recycle[]=_T("$Recycle.Bin");
+TCHAR path_C[]=_T("C:\\");
+TCHAR path_Documents[]=_T("C:\\Users\\"); // C:\\Users\\[[kosta]]\\Documents
 
+TCHAR temp_Users[]=_T("Users\\");
+TCHAR temp_Documents[]=_T("\\Documents\\");
 TCHAR extension[]=_T(".txt");
 TCHAR back[]=_T("\\");
+
+TCHAR Doc_white[100]=_T("\0");
+TCHAR Doc_path[100]=_T("\0");
 
 TCHAR dummyFileName[100]=_T("\0"); // path + resultName + extension 
 TCHAR dummyFolderName[100]=_T("\0"); // path + resultName
@@ -53,9 +57,9 @@ int makeDummyName(){
 		printf("** 최종 더미 파일 이름 - ");
 		printf("[%d] result name: %S\n",j, resultName);
 
-		_tcscpy(dummyWhite[j], resultName);
-		_tcscat(dummyWhite[j], back); 
-		//--> 이름\\
+		//_tcscpy(dummyWhite[j], resultName);
+		//_tcscat(dummyWhite[j], back); 
+		////--> 이름\\,
 		//printf("dummyWhite:-------------%S \n", dummyWhite[j]);
 
 
@@ -65,13 +69,17 @@ int makeDummyName(){
 		printf("\n");
 
 		if(j<3){
+			_tcscpy(dummyWhite[j], resultName);
+			_tcscat(dummyWhite[j], back); 
+			//--> 이름\\,
+			printf("dummyWhite C:\ : ------------->> %S \n", dummyWhite[j]);
 
 			// 더미 폴더 이름 설정
-			_tcscpy(dummyFolderName, path_C);			// dummyFolderName = C:\Users\kosta\Documents(\)
-			_tcscat(dummyFolderName, resultName);	// dummyFolderName = C:\Users\kosta\Documents\[랜덤이름]
+			_tcscpy(dummyFolderName, path_C);		// dummyFolderName = C:\,
+			_tcscat(dummyFolderName, resultName);	// dummyFolderName = C:\[랜덤이름]
 
-			printf("%S\n ", dummyFolderName);
-
+			printf("%S\n ", dummyFolderName);		// dummyFolderName = C:\[랜덤이름]
+			
 
 			// 더미 폴더 생성
 			res = CreateDirectory(dummyFolderName, NULL);
@@ -88,10 +96,10 @@ int makeDummyName(){
 				printf("Create Folder SUCCESS!!!!!!! \n");
 
 			// 더미 파일 이름 설정
-			_tcscpy(dummyFileName, dummyFolderName);	// dummyFileName = C:\Users\kosta\Documents\[랜덤이름]
-			_tcscat(dummyFileName, back);				// dummyFileName = C:\Users\kosta\Documents\[랜덤이름](\)
-			_tcscat(dummyFileName, resultName);			// dummyFileName = C:\Users\kosta\Documents\[랜덤이름]\[랜덤이름]
-			_tcscat(dummyFileName, extension);			// dummyFileName = C:\Users\kosta\Documents\[랜덤이름]\[랜덤이름].txt
+			_tcscpy(dummyFileName, dummyFolderName);	// dummyFileName = C:\[랜덤이름]
+			_tcscat(dummyFileName, back);				// dummyFileName = C:\[랜덤이름]\,
+			_tcscat(dummyFileName, resultName);			// dummyFileName = C:\[랜덤이름]\[랜덤이름]
+			_tcscat(dummyFileName, extension);			// dummyFileName = C:\[랜덤이름]\[랜덤이름].txt
 
 			printf("최종 더미 파일이름과 경로: ");
 			printf("dummyFileName: %S\n", dummyFileName);
@@ -100,12 +108,17 @@ int makeDummyName(){
 
 		}
 		else if(j>2){
+			_tcscpy(dummyWhite[j], Doc_white);	// dummyWhite = Doc_white = Users\kosta\Documents\,
+			_tcscat(dummyWhite[j], resultName);	// dummyWhite = Users\kosta\Documents\[랜덤명]
+			_tcscat(dummyWhite[j], back);		// dummyWhite = Users\kosta\Documents\[랜덤명]\,
+			//--> 이름\\,
+			printf("dummyWhite Documents : -------------%S \n", dummyWhite[j]);
+
 			// 더미 폴더 이름 설정
-			_tcscpy(dummyFolderName, path_Recycle);			// dummyFolderName = C:\Users\kosta\Documents(\)
+			_tcscpy(dummyFolderName, Doc_path);		// dummyFolderName = Doc_path = C:\Users\kosta\Documents\,
 			_tcscat(dummyFolderName, resultName);	// dummyFolderName = C:\Users\kosta\Documents\[랜덤이름]
 
-			printf("%S\n ", dummyFolderName);
-
+			printf("%S\n ", dummyFolderName);		// dummyFolderName = C:\Users\kosta\Documents\[랜덤이름]
 
 			// 더미 폴더 생성
 			res = CreateDirectory(dummyFolderName, NULL);
@@ -123,7 +136,7 @@ int makeDummyName(){
 
 			// 더미 파일 이름 설정
 			_tcscpy(dummyFileName, dummyFolderName);	// dummyFileName = C:\Users\kosta\Documents\[랜덤이름]
-			_tcscat(dummyFileName, back);				// dummyFileName = C:\Users\kosta\Documents\[랜덤이름](\)
+			_tcscat(dummyFileName, back);				// dummyFileName = C:\Users\kosta\Documents\[랜덤이름]\,
 			_tcscat(dummyFileName, resultName);			// dummyFileName = C:\Users\kosta\Documents\[랜덤이름]\[랜덤이름]
 			_tcscat(dummyFileName, extension);			// dummyFileName = C:\Users\kosta\Documents\[랜덤이름]\[랜덤이름].txt
 
@@ -180,3 +193,37 @@ int makeDummy()
 	return 0;
 }
 
+
+void getUserName()
+{
+
+	TCHAR  infoBuf[MAX_VALUE_NAME];
+	DWORD  bufCharCount = MAX_VALUE_NAME;
+
+	bufCharCount = MAX_VALUE_NAME;
+	if( !GetUserName( infoBuf, &bufCharCount ) )
+		printf("GetUserName Error!!! \n"); 
+	printf("\n----------------------- [User name] ----------------------->>  %S\n", infoBuf );
+
+//TCHAR path_Documents[]=_T("C:\\Users\\"); 
+
+//TCHAR temp_Users[]=_T("Users\\");
+//TCHAR temp_Documents[]=_T("\\Documents\\");
+//TCHAR extension[]=_T(".txt");
+//TCHAR back[]=_T("\\");
+
+//TCHAR Doc_white[100]=_T("\0");	// 목표 : \Users\kosta\Documents\[랜덤명]\
+//TCHAR Doc_path[100]=_T("\0");		// 목표 : C:\\Users\\[[kosta]]\\Documents
+
+	_tcscpy(Doc_white, temp_Users);				// Doc_white = Users\,
+	_tcscat(Doc_white, infoBuf);				// Doc_white = Users\kosta
+	_tcscat(Doc_white, temp_Documents);			// Doc_white = Users\kosta\Documents\,
+
+	printf("<<<<<<<<<<<<<<<<<<<<<<< Doc_white <<<<<<<<<<<<<<<<<< %S \n", Doc_white);
+
+	_tcscpy(Doc_path, path_Documents);			// Doc_path = C:\Users\,
+	_tcscat(Doc_path, infoBuf);					// Doc_path = C:\Users\kosta
+	_tcscat(Doc_path, temp_Documents);			// Doc_path = C:\Users\kosta\Documents\,
+
+	printf("<<<<<<<<<<<<<<<<<<<<<<< Doc_path <<<<<<<<<<<<<<<<<< %S \n", Doc_path);
+}
