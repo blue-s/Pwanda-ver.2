@@ -1,9 +1,0 @@
-reg,roaming모니터링, 더미파일 모니터링을 하고, 조건식을 넣어서 프로세스를 kill시키는 작업~~!!
-
-↓
-
-createDummy.cpp 내용 추가
-autoRun.cpp 병합
-deleFileReg.cpp 생성 -> regDel() 함수 
-
-수진이가 올린 소스코드에 추가된 createDummy.cpp 내용 병합, deleteFileReg.cpp 생성 (현재 reg 삭제 함수만 있음)
