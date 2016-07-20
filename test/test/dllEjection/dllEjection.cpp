@@ -3,9 +3,10 @@
 #include "windows.h"
 #include "tlhelp32.h"
 #include "tchar.h"
+#include <stdio.h>
 
-#define DEF_PROC_NAME	(L"explorer.exe")
-#define DEF_DLL_NAME	(L"myhack.dll")
+#define DEF_PROC_NAME	(L"notepad.exe")
+#define DEF_DLL_NAME	(L"ntdll.dll")
 
 DWORD FindProcessID(LPCTSTR szProcessName)
 {
@@ -97,8 +98,10 @@ BOOL EjectDll(DWORD dwPID, LPCTSTR szDllName)
     hSnapshot = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, dwPID);
 
     bMore = Module32First(hSnapshot, &me);
+	printf("th32ProcessID : %d\n", me.th32ProcessID);
     for( ; bMore ; bMore = Module32Next(hSnapshot, &me) )
     {
+		printf("th32ProcessID : %d\n", me.th32ProcessID);
         if( !_tcsicmp((LPCTSTR)me.szModule, szDllName) || 
             !_tcsicmp((LPCTSTR)me.szExePath, szDllName) )
         {

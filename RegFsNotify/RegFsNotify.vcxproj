@@ -90,6 +90,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="file.cpp" />
+    <ClCompile Include="processControl.cpp" />
     <ClCompile Include="reg.cpp" />
     <ClCompile Include="RegFsNotify.cpp" />
   </ItemGroup>

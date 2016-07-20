@@ -11,6 +11,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "testHandleList", "testHandl
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "testFileState", "testFileState\testFileState.vcxproj", "{E0F6B397-D839-4BE7-BD84-76E4CA8CFB9D}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "testReadFileName", "testReadFileName\testReadFileName.vcxproj", "{7B6A55BC-14C0-4355-8601-535E9D17DD68}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -37,6 +39,10 @@ Global
 		{E0F6B397-D839-4BE7-BD84-76E4CA8CFB9D}.Debug|Win32.Build.0 = Debug|Win32
 		{E0F6B397-D839-4BE7-BD84-76E4CA8CFB9D}.Release|Win32.ActiveCfg = Release|Win32
 		{E0F6B397-D839-4BE7-BD84-76E4CA8CFB9D}.Release|Win32.Build.0 = Release|Win32
+		{7B6A55BC-14C0-4355-8601-535E9D17DD68}.Debug|Win32.ActiveCfg = Debug|Win32
+		{7B6A55BC-14C0-4355-8601-535E9D17DD68}.Debug|Win32.Build.0 = Debug|Win32
+		{7B6A55BC-14C0-4355-8601-535E9D17DD68}.Release|Win32.ActiveCfg = Release|Win32
+		{7B6A55BC-14C0-4355-8601-535E9D17DD68}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

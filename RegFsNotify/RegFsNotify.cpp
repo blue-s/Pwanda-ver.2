@@ -12,8 +12,6 @@ USHORT GetConsoleTextAttribute(HANDLE hConsole)
 	return(csbi.wAttributes);
 }
 
-
-
 void Output_Roaming(USHORT Color, LPTSTR format, ... )  //asdf.txt를 출력하기 위한 함수 output
 {
 	va_list args;
@@ -135,24 +133,25 @@ void _tmain(int argc, TCHAR *argv[])
 	g_hStopEvent = CreateEvent(NULL, FALSE, FALSE, NULL);
 	SetConsoleCtrlHandler((PHANDLER_ROUTINE)CtrlHandler, TRUE);
 
-	g_hFile_Prefetch = CreateFile(_T("Prefetch.txt"),    //qwer 파일을 만드는 부분
-		GENERIC_WRITE, 
-		FILE_SHARE_READ, 0, 
-		CREATE_ALWAYS, 0, NULL);
+	ListProcessInfo();
+	//g_hFile_Prefetch = CreateFile(_T("Prefetch.txt"),    //qwer 파일을 만드는 부분
+	//	GENERIC_WRITE, 
+	//	FILE_SHARE_READ, 0, 
+	//	CREATE_ALWAYS, 0, NULL);
 
-	g_hFile_Roaming = CreateFile(_T("Roaming.txt"),     // asdf 파일을 만드는 부분
-		GENERIC_WRITE, 
-		FILE_SHARE_READ, 0, 
-		CREATE_ALWAYS, 0, NULL);
+	//g_hFile_Roaming = CreateFile(_T("Roaming.txt"),     // asdf 파일을 만드는 부분
+	//	GENERIC_WRITE, 
+	//	FILE_SHARE_READ, 0, 
+	//	CREATE_ALWAYS, 0, NULL);
 
-	HANDLE hThread;
+	//HANDLE hThread;
 
-	hThread = CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)StartFileMonitor, NULL, 0, NULL);
+	//hThread = CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)StartFileMonitor, NULL, 0, NULL);
 
-	WaitForMultipleObjects(1, (const HANDLE*)&hThread, TRUE, INFINITE);  //레지스트리 부분의 스레드 사용안함.
+	//WaitForMultipleObjects(1, (const HANDLE*)&hThread, TRUE, INFINITE);  //레지스트리 부분의 스레드 사용안함.
 
-	CloseHandle(g_hStopEvent);
-	CloseHandle(g_hFile_Roaming);
-	CloseHandle(g_hFile_Prefetch);
-	_tprintf(_T("Program terminating.\n"));
+	//CloseHandle(g_hStopEvent);
+	//CloseHandle(g_hFile_Roaming);
+	//CloseHandle(g_hFile_Prefetch);
+	//_tprintf(_T("Program terminating.\n"));
 }

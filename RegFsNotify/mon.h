@@ -1,10 +1,22 @@
 #pragma once
 
+// 헤더파일 선언
 #include <windows.h>
 #include <tchar.h>
+#include <stdio.h>
+#include <string.h>
+
+// [2] 테스트를 위한 추가
+#include <locale.h>	
+#include <shlobj.h>					// for IsUserAnAdmin() function
+#pragma comment(lib, "shell32.lib")	// for IsUserAnAdmin() function
+void checkState();			// 점검 함수 추가
+
+// [3] 테스트를 위한 추가
+#include "tlhelp32.h"
 
 #define STATUS_SUCCESS ((NTSTATUS)0x00000000L)
-
+#define MAX_VALUE_NAME 16383
 #define FILE_CHANGE_FLAGS FILE_NOTIFY_CHANGE_FILE_NAME |\
 	FILE_NOTIFY_CHANGE_DIR_NAME |\
 	FILE_NOTIFY_CHANGE_ATTRIBUTES |\
@@ -14,14 +26,45 @@
 
 #define REG_CHANGE_FLAGS REG_NOTIFY_CHANGE_NAME |\
 	REG_NOTIFY_CHANGE_LAST_SET
-void Output_Roaming(USHORT Color, LPTSTR format, ... );
-void Output_Prefetch(USHORT Color, LPTSTR format, ... );
+
+
+// RegFsNotify.cpp
+extern HANDLE  g_hStopEvent;	// 이벤트 다루는 핸들
+extern HANDLE  g_hFile;			// 파일 다루는 핸들
+extern HANDLE  g_hRegWatch[2];
+
+void Output_Console(USHORT Color, LPTSTR format, ... );
+void Output_File(LPTSTR format, ...);
 void StartFileMonitor(void);
 void StartRegistryMonitor(void);
 
-extern HANDLE  g_hStopEvent;
-extern HANDLE  g_hFile;
-extern HANDLE  g_hRegWatch[2];
+// file.cpp
+#define MAX_DRIVES 24
+#define MAX_VALUE_NAME 16383
+
+// reg.cpp
+extern TCHAR * resultBuffer;
+static TCHAR	achValue[MAX_VALUE_NAME];	//regDelete.cpp
+
+// extractProcessName.cpp
+static int roamingNum = 0;
+static int prefetchNum = 0;
+static int runNum = 0;
+static TCHAR* roamingList[100];
+static TCHAR* prefetchList[100];
+static TCHAR* runList[100];
+
+static TCHAR* roamingPath[100];
+static TCHAR* prefetchPath[100];
+
+int compareFile(TCHAR* list[], int size, TCHAR* fileName);
+void ExtractProcess(DWORD, TCHAR *, TCHAR*);
+
+// processControl.cpp
+void printProcessInformation(PROCESSENTRY32 pe);
+DWORD FindProcessID(LPCTSTR szProcessName);
+void ListProcessInfo(void);
+BOOL KillProcess(TCHAR* TargetProcess);
 
 // whitelisted filenames or paths
 //화이트리스트

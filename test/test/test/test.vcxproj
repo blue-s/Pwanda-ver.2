@@ -11,8 +11,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\testPython\testPython.cpp" />
-    <ClCompile Include="testInput.cpp" />
+    <ClInclude Include="header.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="testHandleList.cpp" />
+    <ClCompile Include="testReadFileName.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{AB705D84-19BC-4DC6-A91F-2068CBF05F0D}</ProjectGuid>
