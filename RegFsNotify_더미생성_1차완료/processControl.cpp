@@ -92,6 +92,7 @@ void ListProcessInfo(void){
 // 프로세스를 Kill
 // 프로세스를 찾기 전까지 ListProcessInfo()와 거의 같음
 BOOL KillProcess(TCHAR* TargetProcess){
+	printf("process name : %S", TargetProcess);
 	HANDLE hProcess = NULL;
 	BOOL isKill = FALSE;
 	PROCESSENTRY32 pe32;

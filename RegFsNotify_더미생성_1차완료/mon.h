@@ -55,6 +55,7 @@ static int runNum = 0;
 static TCHAR* roamingList[100];
 static TCHAR* prefetchList[100];
 static TCHAR* runList[100];
+static int dummy_sense_count=0;  //더미파일 변화감지 횟수
 
 void ListPrint(void);
 BOOL compare(void);
@@ -84,6 +85,7 @@ extern int dummyNum;
 static LPTSTR Roaming_szAllow[] = { 
 	_T("Roaming\\"),
 	_T("AppData\Roaming\\"),
+	_T("Users\Default\AppData\Roaming\\"),
 
 };
 static LPTSTR Prefetch_szAllow[] = {  

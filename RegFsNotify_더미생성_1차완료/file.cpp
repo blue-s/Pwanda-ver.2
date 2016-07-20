@@ -64,14 +64,14 @@ void ProcessChange(int idx)
 					buffer_file_name = _tcsstr(szFile, findPre) + 9;
 				}
 
-				//ExtractProcess(flag, buffer_file_name);					
+				ExtractProcess(flag, buffer_file_name);					
 				Output_Console(FOREGROUND_GREEN, _T("[ADDED] %s%s \n"), g_szDrives[idx], szFile);
 				break;
 
 			case FILE_ACTION_MODIFIED:
 				if(flag==4){
 					Output_Console(FOREGROUND_BLUE, _T("[MODIFIED] %s%s\n"), g_szDrives[idx], szFile);
-					
+					ExtractProcess(flag, szFile);	
 				}
 				else 
 					continue;
@@ -80,6 +80,7 @@ void ProcessChange(int idx)
 			case FILE_ACTION_RENAMED_OLD_NAME:
 				if(flag==4){
 					Output_Console(0, _T("\n[RENAMED (OLD)] %s%s \n"), g_szDrives[idx], szFile);
+					ExtractProcess(flag, szFile);	
 				}
 				else 
 					continue;
@@ -88,6 +89,7 @@ void ProcessChange(int idx)
 			case FILE_ACTION_RENAMED_NEW_NAME:
 				if(flag==4){
 					Output_Console(0, _T("\n[RENAMED (NEW)] %s%s \n"), g_szDrives[idx], szFile);
+					ExtractProcess(flag, szFile);	
 
 				}
 				else 
@@ -98,6 +100,7 @@ void ProcessChange(int idx)
 			case FILE_ACTION_REMOVED: 
 				if(flag==4){
 					Output_Console(FOREGROUND_RED, _T("\n [REMOVED] %s%s \n"), g_szDrives[idx], szFile);
+					ExtractProcess(flag, szFile);	
 					// 삭제하면 dummyNum 감소하도록 해야함  
 				}
 				else 

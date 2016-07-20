@@ -172,7 +172,7 @@ int makeDummyName(){
 		DWORD numOfByteWritten=0;
 		WriteFile(
 			hFile, fileData, sizeof(fileData), &numOfByteWritten, NULL
-			);
+		);
 
 		CloseHandle(hFile);
 	}
@@ -199,6 +199,7 @@ void getUserName()
 
 	TCHAR  infoBuf[MAX_VALUE_NAME];
 	DWORD  bufCharCount = MAX_VALUE_NAME;
+
 
 	bufCharCount = MAX_VALUE_NAME;
 	if( !GetUserName( infoBuf, &bufCharCount ) )
