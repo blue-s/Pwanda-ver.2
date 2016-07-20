@@ -1,7 +1,3 @@
-/*
-	1. 파일 삭제 추가 해야 함
-*/
-
 #include "mon.h"
 
 // 레지스트리 삭제
@@ -33,7 +29,7 @@ BOOL regDel(TCHAR * reg){
 		return FALSE;
 	}
 	else
-		Output_Console(FOREGROUND_BLUE, _T("*** Registry DELETE SUCCESS !!! ***\n\n"));
+		Output_Console(FOREGROUND_GREEN, _T("*** Registry DELETE SUCCESS !!! ***\n\n"));
 
 	RegCloseKey(hKey);
 	printf("Registry Close !! \n");

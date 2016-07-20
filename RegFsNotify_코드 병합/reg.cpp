@@ -1,8 +1,3 @@
-/*
-	1. extractProcess.cpp 로 넘길 변수&값 정리
-		-> 파싱한 Run 내의 데이터 값
-*/
-
 #include "mon.h"
 
 #define MAX_KEY_LENGTH 255
@@ -42,7 +37,7 @@ typedef NTSTATUS (WINAPI *ZWQUERYKEY)(
 
 ZWQUERYKEY ZwQueryKey;
 
-//[4] 레지스트리 변화를 탐지하고 키 값과 데이터를 가져온다 
+// [4] 레지스트리 변화를 탐지하고 키 값과 데이터를 가져온다 
 void QueryKey(HKEY hKey){
 
 	TCHAR    achKey[MAX_KEY_LENGTH];	
@@ -62,7 +57,6 @@ void QueryKey(HKEY hKey){
 
 	DWORD	i, retCode;
 	HKEY	hNewKey;
-	//TCHAR	achValue[MAX_VALUE_NAME];
 	DWORD	cchValue = MAX_VALUE_NAME;
 
 	TCHAR	achData[MAX_VALUE_NAME];
@@ -121,8 +115,6 @@ void QueryKey(HKEY hKey){
 				// 레지스트리 키의 Value 와 Data 값 출력 
 				if(retCode == ERROR_SUCCESS)
 				{ 
-					// Output_Console(FOREGROUND_RED, _T("[Value %d] %s = %s\n"), i+1, achValue, achData); 
-
 					// achData에 랜섬웨어 프로세스 경로가 나와있으므로 path에 복사 
 					memcpy(path, achData, MAX_VALUE_NAME);	
 
@@ -130,6 +122,8 @@ void QueryKey(HKEY hKey){
 					if(result = _tcsstr(path, search)){
 						resultBuffer = result + 8;
 						ExtractProcess(3, resultBuffer);
+
+						Output_Console(FOREGROUND_BLUE, _T("[REG_ADDED] %s \n"), result);
 					}
 				}
 			}
@@ -144,7 +138,7 @@ void QueryKey(HKEY hKey){
 	}
 }
 
-//[3] 시간 업데이트
+// [3] 시간 업데이트
 void UpdateTime(void)
 {
 	SYSTEMTIME st;
@@ -157,7 +151,7 @@ void UpdateTime(void)
 	g_tmStart.LowPart  = ft.dwLowDateTime;
 }
 
-//[2] 스레드 실행
+// [2] 스레드 실행
 DWORD WatchKey(PREGMON p)
 {
 	HANDLE hEvent;
@@ -213,7 +207,7 @@ DWORD WatchKey(PREGMON p)
 	return 0;
 }
 
-//[1] 레지스트리 모니터 시작 
+// [1] 레지스트리 모니터 시작 
 void StartRegistryMonitor(void)
 {
 	HMODULE hNtdll = GetModuleHandle(_T("ntdll.dll"));
@@ -223,8 +217,7 @@ void StartRegistryMonitor(void)
 
 	p[0] = new REGMON;
 	p[0]->hMainKey = HKEY_CURRENT_USER;
-	p[0]->szSubkey = _T("SOFTWARE\\\Microsoft\\Windows\\CurrentVersion\\Run");
-	// Run(자동 실행 등록) 경로 설정 
+	p[0]->szSubkey = _T("SOFTWARE\\\Microsoft\\Windows\\CurrentVersion\\Run"); 
 
 	g_hRegWatch[0] = CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)WatchKey, p[0], 0, NULL);
 }

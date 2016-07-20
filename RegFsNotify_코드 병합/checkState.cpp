@@ -63,13 +63,13 @@ void checkState(){
         switch (t)
         {
         case TokenElevationTypeDefault:
-            _tprintf(_T("기본 사용자이거나, UAC 기능이 OFF 된 상태임.\n"));
+            _tprintf(_T("기본 사용자이거나, UAC 기능이 OFF 된 상태임.\n\n"));
             break;
         case TokenElevationTypeFull:
-            _tprintf(_T("권한상승되었음\n"));	// 우리가 원하는 부분
+            _tprintf(_T("권한상승되었음\n\n"));	// 우리가 원하는 부분
             break;
         case TokenElevationTypeLimited:
-            _tprintf(_T("필터된 토큰에 의해 제한된 권한으로 수행되었음.\n"));
+            _tprintf(_T("필터된 토큰에 의해 제한된 권한으로 수행되었음.\n\n"));
             break;
         default:
             break;

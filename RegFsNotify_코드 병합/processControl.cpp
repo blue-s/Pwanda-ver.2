@@ -46,7 +46,7 @@ void printProcessInformation(PROCESSENTRY32 pe)
 	} PROCESSENTRY32, *PPROCESSENTRY32;
 	*/
 
-	printf("< Process Information >\n");
+	printf("\n< Process Information >\n");
 	
 	printf("dwSize : %d\n", pe.dwSize);
 	printf("cntUsage : %d\n", pe.cntUsage);
@@ -117,7 +117,7 @@ BOOL KillProcess(TCHAR* TargetProcess){
 
 		if(hProcess != NULL){
 			// 프로세스 정보 출력
-			printf("We are starting Kill.\n");
+			printf("\nWe are starting Kill.\n\n");
 			printProcessInformation(pe32);
 
 			// 핸들이 정상적이라면 kill

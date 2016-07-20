@@ -1,14 +1,9 @@
-/*
-	1. 경로 C:\\, C:\\Users\\[[UserName]]\\Documents 더미 폴더 / 파일 생성 소스코드 정리
-	2. 생성된 폴더 / 파일 화이트리스트로 넘기는거 정리
-*/
-
 #include "mon.h"
 #include <stdlib.h>
 #include <time.h>
 
 TCHAR path_C[]=_T("C:\\");
-TCHAR path_Documents[]=_T("C:\\Users\\"); // C:\\Users\\[[kosta]]\\Documents
+TCHAR path_Documents[]=_T("C:\\Users\\"); 
 
 TCHAR temp_Users[]=_T("Users\\");
 TCHAR temp_Documents[]=_T("\\Documents\\");
@@ -18,8 +13,8 @@ TCHAR back[]=_T("\\");
 TCHAR Doc_white[100]=_T("\0");                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
 TCHAR Doc_path[100]=_T("\0");
 
-static TCHAR * dummyFileName[6]; // path + resultName + extension 
-TCHAR dummyFolderName[100]=_T("\0"); // path + resultName
+static TCHAR * dummyFileName[6];		// path + resultName + extension 
+TCHAR dummyFolderName[100]=_T("\0");	// path + resultName
 
 DWORD specialCh[]={33, 35, 36, 37, 64};
 DWORD allCh[] = { 33,35,36,37,64,48,49,50,51,52,
@@ -37,13 +32,11 @@ TCHAR resultName[100]=_T("\0");		// 결과: 더미파일 이름
 TCHAR * dummyWhite[6];
 int dummyNum;
 
-int makeDummyName(){
+int makeDummy(){
 	dummyNum = 0;
 	DWORD lpdwFlags[100];
 	DWORD res;
 	BOOL test;
-
-	TCHAR fileData[] = _T("This is Dummy File");
 
 	srand(time(NULL));
 
@@ -62,31 +55,20 @@ int makeDummyName(){
 				resultName[i]=allCh[remainIndex];
 			}
 
-			//printf("** 최종 더미 파일 이름 - ");
-			//printf("[%d] result name: %S\n",j, resultName);
-
 			dummyNum++;
-			printf("\n");
-
 
 			if(j<3){
 
 				_tcscpy(dummyWhite[j], resultName);
 				_tcscat(dummyWhite[j], back); 
-				//--> 이름\\,
-				//printf("dummyWhite C:\ : ------------->> %S \n", dummyWhite[j]);
-
+				
 				// 더미 폴더 이름 설정
 				_tcscpy(dummyFolderName, path_C);		// dummyFolderName = C:\,
 				_tcscat(dummyFolderName, resultName);	// dummyFolderName = C:\[랜덤이름]
 
-				//printf("%S\n ", dummyFolderName);		// dummyFolderName = C:\[랜덤이름]
-
 
 				// 더미 폴더 생성
 				res = CreateDirectory(dummyFolderName, NULL);
-				//printf("dummyFolderName: %S\n", dummyFolderName);
-
 
 				// 더미 폴더 생성 에러 처리
 				if (res == 0)
@@ -94,38 +76,28 @@ int makeDummyName(){
 					DWORD err = GetLastError();
 					printf("err %d\n", err);
 				}
-				else
-					//printf("Create Folder SUCCESS!!!!!!! \n");
 
 				// 더미 파일 이름 설정
-				_tcscpy(dummyFileName[j], dummyFolderName);	// dummyFileName = C:\[랜덤이름]
+				_tcscpy(dummyFileName[j], dummyFolderName);		// dummyFileName = C:\[랜덤이름]
 				_tcscat(dummyFileName[j], back);				// dummyFileName = C:\[랜덤이름]\,
 				_tcscat(dummyFileName[j], resultName);			// dummyFileName = C:\[랜덤이름]\[랜덤이름]
 				_tcscat(dummyFileName[j], extension);			// dummyFileName = C:\[랜덤이름]\[랜덤이름].txt
 
-				printf("최종 더미 파일이름과 경로: ");
+				printf("Path Dummy File : ");
 				printf("dummyFileName: %S\n", dummyFileName[j]);
-
-				printf("\n");
 
 			}
 			else if(j>2){
 				_tcscpy(dummyWhite[j], Doc_white);	// dummyWhite = Doc_white = Users\kosta\Documents\,
 				_tcscat(dummyWhite[j], resultName);	// dummyWhite = Users\kosta\Documents\[랜덤명]
 				_tcscat(dummyWhite[j], back);		// dummyWhite = Users\kosta\Documents\[랜덤명]\,
-				//--> 이름\\,
-				//printf("dummyWhite Documents : -------------%S \n", dummyWhite[j]);
 
 				// 더미 폴더 이름 설정
 				_tcscpy(dummyFolderName, Doc_path);		// dummyFolderName = Doc_path = C:\Users\kosta\Documents\,
 				_tcscat(dummyFolderName, resultName);	// dummyFolderName = C:\Users\kosta\Documents\[랜덤이름]
 
-				//printf("%S\n ", dummyFolderName);		// dummyFolderName = C:\Users\kosta\Documents\[랜덤이름]
-
 				// 더미 폴더 생성
 				res = CreateDirectory(dummyFolderName, NULL);
-				//printf("dummyFolderName: %S\n", dummyFolderName);
-
 
 				// 더미 폴더 생성 에러 처리
 				if (res == 0)
@@ -133,20 +105,15 @@ int makeDummyName(){
 					DWORD err = GetLastError();
 					printf("err %d\n", err);
 				}
-				else
-					//printf("Create Folder SUCCESS!!!!!!! \n");
 
 				// 더미 파일 이름 설정
-				_tcscpy(dummyFileName[j], dummyFolderName);	// dummyFileName = C:\Users\kosta\Documents\[랜덤이름]
+				_tcscpy(dummyFileName[j], dummyFolderName);		// dummyFileName = C:\Users\kosta\Documents\[랜덤이름]
 				_tcscat(dummyFileName[j], back);				// dummyFileName = C:\Users\kosta\Documents\[랜덤이름]\,
 				_tcscat(dummyFileName[j], resultName);			// dummyFileName = C:\Users\kosta\Documents\[랜덤이름]\[랜덤이름]
 				_tcscat(dummyFileName[j], extension);			// dummyFileName = C:\Users\kosta\Documents\[랜덤이름]\[랜덤이름].txt
 
-				printf("최종 더미 파일이름과 경로: ");
+				printf("Path Dummy File : ");
 				printf("dummyFileName: %S\n", dummyFileName[j]);
-
-				printf("\n");
-
 
 			}
 
@@ -155,11 +122,11 @@ int makeDummyName(){
 
 		hFile = CreateFile( dummyFileName[j], 
 			GENERIC_READ | GENERIC_WRITE,
-			NULL,//FILE_SHARE_WRITE,					// share for writing
-			NULL,								// default security
+			NULL,		
+			NULL,						
 			CREATE_ALWAYS, 
-			FILE_ATTRIBUTE_NORMAL,				// 일반 파일 
-			NULL);								// 기존에 존재하는 파일과 동일한 특성을 가지는 새 파일을 만들 때 사용되는 전달인자 
+			FILE_ATTRIBUTE_NORMAL,				
+			NULL);								
 
 
 		if(hFile == INVALID_HANDLE_VALUE){
@@ -170,21 +137,20 @@ int makeDummyName(){
 
 		else
 		{
-			//printf("File's HANDLE is OK!\n");
 			test = GetHandleInformation(hFile, lpdwFlags);
-			//printf("The return value is %d, error %d\n", test, GetLastError());
 			/*
 			GetLastError 함수로 에러값을 확인해보면 파일이 새로 생성된 경우엔 0이 반환되지만 파일이 이미 있는 경우에는 ERROR_ALREADY_EXISTS(183L)이 반환된다.
 			*/
 		}
 
-		writeDummy(); // 더미 파일 내용쓰기
+		writeDummy(); // 더미 파일 내용 쓰기
 
 	}
 
 	if(dbFlag==true){
 		dbFlag=false;
 	}
+
 	return 0;
 }
 
@@ -198,6 +164,7 @@ void writeDummy()
 
 	DWORD numOfByteWritten=0;
 
+	// 크기 증가를 위해 20번 반복
 	for(int i=0; i<20; i++)
 	{
 		WriteFile(
@@ -207,7 +174,6 @@ void writeDummy()
 	}
 
 	CloseHandle(hFile); 
-
 }
 
 void getUserName()
@@ -221,24 +187,19 @@ void getUserName()
 		printf("GetUserName Error!!! \n"); 
 	}
 
-	//printf("\n----------------------- [User name] ----------------------->>  %S\n", infoBuf );
-
 	_tcscpy(Doc_white, temp_Users);				// Doc_white = Users\,
 	_tcscat(Doc_white, infoBuf);				// Doc_white = Users\kosta
 	_tcscat(Doc_white, temp_Documents);			// Doc_white = Users\kosta\Documents\,
-
-	//printf("<<<<<<<<<<<<<<<<<<<<<<< Doc_white <<<<<<<<<<<<<<<<<< %S \n", Doc_white);
 
 	_tcscpy(Doc_path, path_Documents);			// Doc_path = C:\Users\,
 	_tcscat(Doc_path, infoBuf);					// Doc_path = C:\Users\kosta
 	_tcscat(Doc_path, temp_Documents);			// Doc_path = C:\Users\kosta\Documents\,
 
-	//printf("<<<<<<<<<<<<<<<<<<<<<<< Doc_path <<<<<<<<<<<<<<<<<< %S \n", Doc_path);
 }
 
-void makeDummy()
+void dummy_main()
 {	
 	getUserName();
-	makeDummyName();
+	makeDummy();
 
 }

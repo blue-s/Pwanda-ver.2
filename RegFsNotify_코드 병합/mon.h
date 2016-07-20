@@ -15,15 +15,15 @@
 
 // [2] 테스트를 위한 추가
 #include <locale.h>	
-#include <shlobj.h>					// for IsUserAnAdmin() function
-#pragma comment(lib, "shell32.lib")	// for IsUserAnAdmin() function
-void checkState();			// 점검 함수 추가
+#include <shlobj.h>						// for IsUserAnAdmin() function
+#pragma comment(lib, "shell32.lib")		// for IsUserAnAdmin() function
+void checkState();						// 점검 함수 추가
 
 // [3] 테스트를 위한 추가
 #include "tlhelp32.h"
 #define DEF_PROC_NAME	(L"RegFsNotify.exe")	//(L"svchost.exe")
 #define DEF_DLL_NAME	(L"myhack.dll")
-int setUser();				// 사용자 권한 함수 추가
+int setUser();									// 사용자 권한 함수 추가
 
 #define STATUS_SUCCESS ((NTSTATUS)0x00000000L)
 #define MAX_VALUE_NAME 16383
@@ -39,8 +39,8 @@ int setUser();				// 사용자 권한 함수 추가
 
 
 // RegFsNotify.cpp
-extern HANDLE  g_hStopEvent;	// 이벤트 다루는 핸들
-extern HANDLE  g_hFile;			// 파일 다루는 핸들
+extern HANDLE  g_hStopEvent;
+extern HANDLE  g_hFile;		
 extern HANDLE  g_hRegWatch[2];
 
 void Output_Console(USHORT Color, LPTSTR format, ... );
@@ -57,21 +57,17 @@ extern bool dbFlag;
 
 // extractProcessName.cpp
 static int roamingNum = 0;
-static int prefetchNum = 0;
 static int runNum = 0;
 static TCHAR* roamingList[100];
-static TCHAR* prefetchList[100];
 static TCHAR* runList[100];
-static int dummy_sense_count=0;  //더미파일 변화감지 횟수
+static int dummy_sense_count=0;		//더미파일 변화감지 횟수
 
 void ListPrint(void);
 BOOL compare(void);
 void ExtractProcess(DWORD, TCHAR *);
 
-
 // setUser.cpp
 BOOL SetPrivilege(LPCTSTR lpszPrivilege, BOOL bEnablePrivilege);	// setPrivilege
-
 
 // processControl.cpp
 DWORD FindProcessID(LPCTSTR szProcessName);			// 원하는 프로세스의 PID 가져옴
@@ -79,12 +75,11 @@ void printProcessInformation(PROCESSENTRY32 pe);	// 프로세스 정보 출력
 void ListProcessInfo(void);							// 프로세스 목록 출력
 BOOL KillProcess(TCHAR* TargetProcess);				// 프로세스 죽이기
 
-
 // createDummy.cpp
-void makeDummy();
-void getUserName();
-void writeDummy();
-int makeDummyName();
+void dummy_main();		// getUserName(), makeDummy() 호출
+void getUserName();		// 사용자 이름 받아옴
+void writeDummy();		// 더미 파일 내용 쓰기
+int makeDummy();	// 랜덤 이름 생성
 
 static HANDLE hFile;
 extern TCHAR * dummyWhite[6];
@@ -109,28 +104,17 @@ static LPTSTR Roaming_szAllow[] = {
 	_T("AppData\Roaming\\"),
 
 };
-static LPTSTR Prefetch_szAllow[] = {  
-	_T("Windows\Prefetch\\"),
-	_T("Prefetch\\"),
-};
 
 // 화이트리스트에 속하는지 여부 확인 함수
-// return 1 : Roaming
-// return 2 : Prefetch
-// return 4 : Dummy File
-// return -1 : Nothing
+// return 1		: Roaming
+// return 4		: Dummy File
+// return -1	: Nothing
 static int Whitelisted(LPTSTR szFile)              
 {
 	for(int i=0; i<sizeof(Roaming_szAllow)/sizeof(LPTSTR); i++)
 	{
 		if (_tcsstr(szFile, Roaming_szAllow[i]) != NULL)
 			return 1;
-	}
-
-	for(int i=0; i<sizeof(Prefetch_szAllow)/sizeof(LPTSTR); i++)
-	{
-		if (_tcsstr(szFile, Prefetch_szAllow[i]) != NULL) 
-			return 2;
 	}
 
 	for(int i=0; i<6; i++){

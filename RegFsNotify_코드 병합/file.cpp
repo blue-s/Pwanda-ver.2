@@ -1,10 +1,8 @@
-/*
-	1. Output_Console(FOREGROUND_GREEN, _T(" ")); 정리 필욘
-	2. extractProcess.cpp 로 넘길 변수&값 정리
-		-> 파싱한 Roaming 폴더 내의 파일명 / 감지된 더미 폴더/파일명
-*/
-
 #include "mon.h"
+
+// 파일 생성/수정/이름변경/삭제 감지 출력하려면
+//Output_Console(FOREGROUND_BLUE, _T("[속성] %s%s\n"), g_szDrives[idx], szFile);
+					
 
 // 변수 선언
 #define MAX_DRIVES 24
@@ -20,7 +18,6 @@ TCHAR * buffer_file_name;		// 파일명 저장하는 임시 변수
 TCHAR * buffer_extension;		// 확장자 저장하는 임시 변수
 	
 const TCHAR * checkRoam =_T("Roaming");
-const TCHAR * findPre =_T("Prefetch");
 const TCHAR * checkPoint = _T(".");
 const TCHAR * checkEXE = _T(".exe");
 
@@ -46,7 +43,7 @@ void ProcessChange(int idx)
 			memcpy(szFile, pNotify->FileName, pNotify->FileNameLength);
 
 			// 플래그에 따른 파일명 추출 및 비교
-			// 1: Roaming, 2: Prefetch, -1: Nothing
+			// 1: Roaming, 4: Dummy, -1: Nothing
 			flag = Whitelisted(szFile);
 
 			// 화이트리스트에 속하지 않는 경우
@@ -56,30 +53,27 @@ void ProcessChange(int idx)
 			switch (pNotify->Action)
 			{
 			case FILE_ACTION_ADDED:
-				// Roaming에 해당하는 경우, 파일 명만 추출
+
 				if(flag == 1)
 				{
 					buffer_file_name = _tcsstr(szFile, checkRoam) + 8;
 					buffer_extension = _tcsstr(buffer_file_name, checkPoint);
 
-					//확장자가 exe가 아닌 경우 
 					if(_tcsicmp(buffer_extension, checkEXE) != 0)	continue;
 				}
-				else if(flag == 2)
-				{
-					buffer_file_name = _tcsstr(szFile, findPre) + 9;
-				}
 
-				//ExtractProcess(flag, buffer_file_name);					
-				Output_Console(FOREGROUND_GREEN, _T("[ADDED] %s%s \n"), g_szDrives[idx], szFile);
+				ExtractProcess(flag, buffer_file_name);					
+				Output_Console(FOREGROUND_BLUE, _T("[ADDED] %s%s \n"), g_szDrives[idx], szFile);
 				break;
 
 			case FILE_ACTION_MODIFIED:
 				if(flag==4){
-					//Output_Console(FOREGROUND_BLUE, _T("[MODIFIED] %s%s\n"), g_szDrives[idx], szFile);
+					Output_Console(FOREGROUND_BLUE, _T("[MODIFIED] %s%s\n"), g_szDrives[idx], szFile);
+
 					// 여기에 프로세스 추출.cpp 들어감 
+
 					dbFlag=true;
-					makeDummyName();
+					makeDummy();
 				}
 				else 
 					continue;
@@ -87,10 +81,12 @@ void ProcessChange(int idx)
 
 			case FILE_ACTION_RENAMED_OLD_NAME:
 				if(flag==4){
-					Output_Console(0, _T("\n[RENAMED (OLD)] %s%s \n"), g_szDrives[idx], szFile);
+					Output_Console(FOREGROUND_BLUE, _T("\n[RENAMED (OLD)] %s%s \n"), g_szDrives[idx], szFile);
+
 					// 여기에 프로세스 추출.cpp 들어감 
+
 					dbFlag=true;
-					makeDummyName();
+					makeDummy();
 				}
 				else 
 					continue;
@@ -98,10 +94,12 @@ void ProcessChange(int idx)
 
 			case FILE_ACTION_RENAMED_NEW_NAME:
 				if(flag==4){
-					Output_Console(0, _T("\n[RENAMED (NEW)] %s%s \n"), g_szDrives[idx], szFile);
+					Output_Console(FOREGROUND_BLUE, _T("\n[RENAMED (NEW)] %s%s \n"), g_szDrives[idx], szFile);
+
 					// 여기에 프로세스 추출.cpp 들어감 
+
 					dbFlag=true;
-					makeDummyName();
+					makeDummy();
 				}
 				else 
 					continue;
@@ -109,12 +107,14 @@ void ProcessChange(int idx)
 
 			case FILE_ACTION_REMOVED: 
 				if(flag==4){
-					Output_Console(FOREGROUND_RED, _T("\n [REMOVED] %s%s \n"), g_szDrives[idx], szFile);
-					//getDummyDB(); //더미파일이 삭제되었으니까 db에 있는 파일들을 다시 끄집어와야 한다 
-					//이미 dummyWhite는 파일 삭제와 별개로 저장되어있는 전역변수 --> DB 역할을 해준다 
+					Output_Console(FOREGROUND_BLUE, _T("\n [REMOVED] %s%s \n"), g_szDrives[idx], szFile);
+					
+					// getDummyDB(); //더미파일이 삭제되었으니까 db에 있는 파일들을 다시 끄집어와야 한다 
+					// 이미 dummyWhite는 파일 삭제와 별개로 저장되어있는 전역변수 --> DB 역할을 해준다 
 					// 따라서 전체 경로를 받은 dummyFileName을 포인터 배열 전역변수로 빼서 바로 파일생성이 가능하게 한다
+					
 					dbFlag=true;
-					makeDummyName();
+					makeDummy();
 					
 				}
 				else 

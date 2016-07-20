@@ -1,9 +1,9 @@
 #include "mon.h"
 
 HANDLE g_hStopEvent;
-HANDLE g_hFile;		// 파일 다루는 핸들
+HANDLE g_hFile;
 HANDLE g_hRegWatch[2];
-bool dbFlag;
+bool dbFlag;			// 더미 변경 판단 변수
 
 USHORT GetConsoleTextAttribute(HANDLE hConsole)
 {
@@ -122,7 +122,7 @@ void _tmain(int argc, TCHAR *argv[])
 	// 프로그램 종료를 사용자가 원하면 dummyWhite 리스트를 불러와서 이 경로에 있는 파일들을 다 삭제한다 
 
 	dbFlag=false;
-	makeDummy();
+	dummy_main();
 	saveDummyToDB();
 	
 
